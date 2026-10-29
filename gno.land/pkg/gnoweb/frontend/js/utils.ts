@@ -9,7 +9,9 @@ export function debounce<P extends unknown[]>(
 	};
 }
 
-// Escape for $'...' bash quoting (handles newlines + backslash + single quote)
+// Escape for $'...' bash quoting (handles newlines + backslash + single quote).
+// Callers MUST wrap the escaped value in $'…' — inside double quotes, `"`,
+// `$` and backticks are live and an unescaped value can execute on paste.
 export function escapeShellSpecialChars(arg: string): string {
 	return arg
 		.replace(/(['\\])/g, "\\$1") // escape backslash + single quote
